@@ -1,4 +1,6 @@
 <div class="cont-row">
+
+
 <?php
 
 	
@@ -25,12 +27,15 @@
 	    $arr_posts = new WP_Query( $args );			 
 ?>
 <?php   
+		$posts = $arr_posts->get_posts();
+		$count = count($posts);
 	    if ( $arr_posts->have_posts() ){
 	    ?>	
 		    <div class="width-col">
 				<div class="image-wrapper">
 					<div class="img-box">
 					    <?php
+					    	$showImageClass = $mySlide . " show_homepage_img";
 					    	$i = 1;
 					        while ( $arr_posts->have_posts() ){ 
 					        	
@@ -39,20 +44,25 @@
 						        	$img_attribs = wp_get_attachment_image_src( get_post_thumbnail_id(), 'thumbnail' ); 
 						        	if ( has_post_thumbnail() && $img_attribs) {
 				                    	$imagePath = the_post_thumbnail('post-thumbnail', ['class' => $mySlide . " " .$displayClass]);
-						        	} 
-					            
+						        	} 					            
 						        $i++;
 						    }
 						?>
     					<div class="img-control">
-							<a href="javascript:;" class="sl" onclick="plusDivs(-1, '<?php echo $mySlide;?>')"></a>
-	                		<a href="javascript:;" class="sr"onclick="plusDivs(1, '<?php echo $mySlide;?>')"></a>
+							<a href="javascript:;" class="sl" onclick="minusDivs(-1, '<?php echo $mySlide;?>')"></a>
+	                		<a href="javascript:;" class="sr"onclick="plusDivs(1, '<?php echo $mySlide;?>', 
+	                		'<?php echo $mySlide;?>')"></a>
 	                	</div>
+
 					</div>
+					
 					<div class="img-detail">
 						<h5><?php echo $categoryVal->name; ?></h5>
-						<span>1/5</span>
+						<span class="paging_<?php echo $mySlide;?>">1/<?php echo $count;?></span>
 					</div>
+
+
+
 				</div>
 			</div>
 <?php
@@ -61,6 +71,8 @@
 	}
 ?>	      
 </div>
+
+
 
 <?php /*
 <div class="cont-row">
@@ -134,4 +146,4 @@
 	</div>
 </div>
 
-?>
+*/ ?>
