@@ -1,4 +1,60 @@
+<div class="cont-row">
+<?php
+	$categories = get_categories();
+	$k=1;
+	foreach($categories as $categoryVal) {
+		$mySlide = "mySlides_".$k;
+?> 		
+<?php
+	    $paged = (get_query_var( 'paged' )) ? get_query_var( 'paged' ) : 1;
+	    $args = array(
+	        'post_type' => 'post',
+	        'post_status' => 'publish',
+	        'cat' => $categoryVal->cat_ID,
+	        //'posts_per_page' => 5,
+	        'paged' => $paged,
+	    );
+	    $arr_posts = new WP_Query( $args );			 
+?>
+<?php   
+	    if ( $arr_posts->have_posts() ){
+	    ?>	
+		    <div class="width-col">
+				<div class="image-wrapper">
+					<div class="img-box">
+					    <?php
+					    	$i = 1;
+					        while ( $arr_posts->have_posts() ){ 
+					        	
+						        	$displayClass = ($i == 1) ? 'show_homepage_img' : 'hide_homepage_img';				        	
+						        	$arr_posts->the_post();
+						        	$img_attribs = wp_get_attachment_image_src( get_post_thumbnail_id(), 'thumbnail' ); 
+						        	if ( has_post_thumbnail() && $img_attribs) {
+				                    	$imagePath = the_post_thumbnail('post-thumbnail', ['class' => $mySlide . " " .$displayClass]);
+						        	} 
+					            
+						        $i++;
+						    }
+						?>
+    					<div class="img-control">
+							<a href="javascript:;" class="sl" onclick="plusDivs(-1, '<?php echo $mySlide;?>')"></a>
+	                		<a href="javascript:;" class="sr"onclick="plusDivs(1, '<?php echo $mySlide;?>')"></a>
+	                	</div>
+					</div>
+					<div class="img-detail">
+						<h5><?php echo $categoryVal->name; ?></h5>
+						<span>1/5</span>
+					</div>
+				</div>
+			</div>
+<?php
+	}
+	$k++;
+	}
+?>	      
+</div>
 
+<?php /*
 <div class="cont-row">
 	<div class="width-col">
 		<div class="image-wrapper">
@@ -70,3 +126,4 @@
 	</div>
 </div>
 
+?>

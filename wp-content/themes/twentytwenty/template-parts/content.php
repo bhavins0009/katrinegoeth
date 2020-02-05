@@ -13,10 +13,109 @@
 
 ?>
 
+    <?php
+	    $categories = get_categories();
+    	foreach($categories as $categoryVal) {
+    ?> 		
+    <?php
+		    $paged = (get_query_var( 'paged' )) ? get_query_var( 'paged' ) : 1;
+		    $args = array(
+		        'post_type' => 'post',
+		        'post_status' => 'publish',
+		        'cat' => $categoryVal->cat_ID,
+		        //'posts_per_page' => 5,
+		        'paged' => $paged,
+		    );
+		    $arr_posts = new WP_Query( $args );
+		 
+
+		    if ( $arr_posts->have_posts() ) :
+		 
+		    	print_r($categoryVal->cat_ID); 
+		    	$i = 1;
+		        while ( $arr_posts->have_posts() ) :
+
+		        	echo '<br/>i => ' . $i . '<br/>';
+
+		        	$arr_posts->the_post();
+		            ?>
+		            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		                <?php
+		                if ( has_post_thumbnail() ) :
+		                    the_post_thumbnail();
+		                endif;
+		                ?>
+		                <header class="entry-header">
+		                    <h1 class="entry-title"><?php echo $categoryVal->name; ?></h1>
+		                </header>
+		                
+		            </article>
+		            <?php
+		            $i++;
+		        endwhile;
+		        
+		    endif;
+		?>
+	<?php } ?>
+
+<?php 
+  
+
+  
+  foreach ($categories as $key => $categoryValue) {
+
+  		$termId = $categoryValue->term_id;
+  		$title = $categoryValue->name;
+  		$cp = new WP_Query(
+	      array (
+	        'cat' => $termId,
+	        'fields' => 'ids',
+	        'ignore_sticky_posts' => true
+	      )
+	    );
+	    // var_dump($cp->posts); // debug
+	    if ($cp->have_posts()) {
+
+	    	
+
+		      $attach = new WP_Query(
+		        array (
+		          'post_parent__in' => $cp->posts,
+		          'post_type' => 'attachment',
+		          'post_status' => 'inherit',
+		          'ignore_sticky_posts' => true,
+		          'posts_per_page' => 1
+		        )
+		      );
+
+		      if ($attach->have_posts()) {
+
+		      	//print_r($attach);
+		      	
+		      	//echo $image = "<img src='".$attach->posts[0]->guid."' width='100px' height='100px'>";
+		      	//echo '<br/>';
+		        //$term->image = wp_get_attachment_image($attach->posts[0]->ID);
+		      } else {
+		        $image = '';
+		      }
+
+	    }
+
+  }
+
+	
+    
+
+  exit;
+
+  // foreach($categories as $category) {
+	 //   echo '<div class="col-md-4"><a href="' . get_category_link($category->term_id) . '">' . $category->name . '</a></div>';
+  // }	
+  exit();	  
+?>
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
 	<?php
-
 	get_template_part( 'template-parts/entry-header' );
 
 	if ( ! is_search() ) {
