@@ -1,6 +1,14 @@
 <div class="cont-row">
 <?php
-	$categories = get_categories();
+
+	
+	if ( is_front_page() ) {
+		$page = get_page_by_title( 'home' );
+		$categories = get_the_category($page->ID);	
+	} else {
+		$categories = get_the_category();	
+	}
+	
 	$k=1;
 	foreach($categories as $categoryVal) {
 		$mySlide = "mySlides_".$k;

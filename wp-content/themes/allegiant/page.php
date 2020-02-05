@@ -1,8 +1,12 @@
 <?php get_header(); ?>
 
-<?php get_template_part( 'template-parts/element', 'page-header' ); ?>
+<?php //get_template_part( 'template-parts/element', 'page-header' ); ?>
 
 <div id="main" class="main">
+
+	<?php get_template_part( 'template-parts/element', 'customhome' ); ?>
+
+	<?php /*	
 	<div class="container">
 		<section id="content" class="content">
 			<?php do_action( 'cpotheme_before_content' ); ?>
@@ -25,6 +29,8 @@
 		<?php get_sidebar(); ?>
 		<div class="clear"></div>
 	</div>
+	*/ ?>
+
 </div>
 
 <?php get_footer(); ?>

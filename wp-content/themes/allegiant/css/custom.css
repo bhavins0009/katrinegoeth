@@ -8,7 +8,7 @@ img { }
 .container { max-width:100%; width:100%; margin:0 auto }
 .cont-row { padding: 0 30px }
 .image-wrapper { }
-.width-col { width:33.33333333333333%; float: left; padding: 0 15px 15px;}
+.width-col { width:33.33333333333333%; float: left; padding: 0 30px;}
 .img-box { text-align: center; position: relative;  z-index: 2;/* height: 500px; overflow: hidden;*/ display: inline-block; vertical-align: top; box-shadow: 0 3px 5px rgba(0,0,0, .25)}
 .img-detail { font-size: 14px !important; margin-top: 10px}
 .img-detail h5 { float: left; margin-top: 0; font-weight: normal; font-size: 1.2rem;font-family: Arial;  }
@@ -22,12 +22,30 @@ img { }
 }
  
 .header .logo { padding: 30px 0x 0}
-.header {padding: 30px 20px 0; }
+.header {padding: 40px 40px 20px; }
 .header .title a{ color: #444 }
+.footer { display: none }
 .footer:before { display: none }
 .subfooter { display: none !important }
 .footer { padding:30px 0; }
-.menu-main li a { font-weight: 500;color:#444;padding: 0 10px;   }
+.menu-main { position: relative }
+.menu-main .menu-item-has-children > a { padding-right: 0 }
+.menu-main li { margin:0 15px; position: relative; }
+.menu-main > li > ul li {  padding: 0; margin:0 0 5px; }
+.menu-main li a { padding: 0 10px; position: relative; }
+.menu-main li a { font-weight: 500;color:#444;padding: 0; position: relative;}
+.menu-main li > a:after { content: ''; position: absolute; width: 0; height: 1px; background-color: #444; left:0; bottom:-1px; transition: width 0.4s ease }
+.menu-main li > a:hover:after { width: 100% }
 .menu-main li:hover > a, .menu-main li a:hover { color:#000; }
+.menu-main li ul { padding:7px 0; min-width:130px; left:-15px; right:-15px; width: 100%; position: absolute; background:#f3f1ec; border: 0; text-align:left;}
+.menu-main > li > ul:before, .menu-main > li > ul:after, .menu-main .menu-item-has-children:before { display: none; }
+.menu-main > li > ul li { margin:0 15px 7px; }
+
+.menu-main li.current_page_item a:after { width: 100% }
+.menu-main li.current_page_item ul li a:after {width: 0}
+.menu-main li ul li a:hover:after { width: 100% }
+.menu-main > li > ul li a { padding: 0; font-size:1em;font-weight: 500; display: inline-block; width: auto !important }
+.menu-main li:hover > a, .menu-main li:focus-within > a, .menu-main li a:hover, .menu-main li a:focus { color:#444; }
+.menu-main > li > ul li a:after { }
 .show_homepage_img{display: block}
 .hide_homepage_img{display: none}
