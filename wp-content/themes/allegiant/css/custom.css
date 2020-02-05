@@ -40,12 +40,14 @@ img { }
 .menu-main li ul { padding:7px 0; min-width:130px; left:-15px; right:-15px; width: 100%; position: absolute; background:#f3f1ec; border: 0; text-align:left;}
 .menu-main > li > ul:before, .menu-main > li > ul:after, .menu-main .menu-item-has-children:before { display: none; }
 .menu-main > li > ul li { margin:0 15px 7px; }
-
-.menu-main li.current_page_item a:after { width: 100% }
+.menu-main > li.current_page_item a:after { width: 100% }
 .menu-main li.current_page_item ul li a:after {width: 0}
 .menu-main li ul li a:hover:after { width: 100% }
 .menu-main > li > ul li a { padding: 0; font-size:1em;font-weight: 500; display: inline-block; width: auto !important }
 .menu-main li:hover > a, .menu-main li:focus-within > a, .menu-main li a:hover, .menu-main li a:focus { color:#444; }
-.menu-main > li > ul li a:after { }
+.menu-main > li. > ul li.current_page_item a:after { width: 0; }
+
+.menu-main li.current_page_item ul li.current_page_item a:after {width:0 !important;}
+
 .show_homepage_img{display: block}
 .hide_homepage_img{display: none}
