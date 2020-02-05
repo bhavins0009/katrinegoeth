@@ -17,3 +17,8 @@ function showDivs(n, imgClass) {
   x[slideIndex-1].style.display = "block";  
 }
 
+jQuery(document).ready(function() {
+  jQuery(".img-box img").css({
+    'width': (jQuery(".img-detail").width() + 'px')
+  });
+});
