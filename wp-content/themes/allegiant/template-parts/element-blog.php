@@ -1,4 +1,21 @@
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>"> 
+
+	<div class="post-body">
+		
+		
+		<div class="post-content">
+			<?php cpotheme_postpage_content(); ?>
+		</div>
+		
+		
+		
+		<div class="clear"></div>
+	</div>
+
+</article>
+
+<?php /*
+<article <?php post_class(); ?> id="post-<?php the_ID(); ?>"> 
 	<div class="post-image">
 		<?php cpotheme_postpage_image(); ?>		
 	</div>	
@@ -23,3 +40,4 @@
 		<div class="clear"></div>
 	</div>
 </article>
+*/?>

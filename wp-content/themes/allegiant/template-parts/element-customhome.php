@@ -1,76 +1,78 @@
 <div class="cont-row">
+	<div class="masonry">
+
+	<?php
+
+		
+		if ( is_front_page() ) {
+			$page = get_page_by_title( 'home' );
+			$categories = get_the_category($page->ID);	
+		} else {
+			$categories = get_the_category();	
+		}
+		
+		$k=1;
+		foreach($categories as $categoryVal) {
+			$mySlide = "mySlides_".$k;
+	?> 		
+	<?php
+		    $paged = (get_query_var( 'paged' )) ? get_query_var( 'paged' ) : 1;
+		    $args = array(
+		        'post_type' => 'post',
+		        'post_status' => 'publish',
+		        'cat' => $categoryVal->cat_ID,
+		        //'posts_per_page' => 5,
+		        'paged' => $paged,
+		    );
+		    $arr_posts = new WP_Query( $args );			 
+	?>
+	<?php   
+			$posts = $arr_posts->get_posts();
+			$count = count($posts);
+		    if ( $arr_posts->have_posts() ){
+		    ?>	<div class="item">
+				    <div class="width-col">
+						<div class="image-wrapper">
+
+							<div class="img-box">
+							    <?php
+							    	$showImageClass = $mySlide . " show_homepage_img";
+							    	$i = 1;
+							        while ( $arr_posts->have_posts() ){ 
+							        	
+								        	$displayClass = ($i == 1) ? 'show_homepage_img' : 'hide_homepage_img';				        	
+								        	$arr_posts->the_post();
+								        	$img_attribs = wp_get_attachment_image_src( get_post_thumbnail_id(), 'thumbnail' ); 
+								        	if ( has_post_thumbnail() && $img_attribs) {
+						                    	$imagePath = the_post_thumbnail('post-thumbnail', [ 'class' => $mySlide . " " .$displayClass, 'style' => 'width:auto !important']);
+								        	} 					            
+								        $i++;
+								    }
+								?>
+		    					<div class="img-control">
+									<a href="javascript:;" class="sl" onclick="minusDivs(-1, '<?php echo $mySlide;?>')"></a>
+			                		<a href="javascript:;" class="sr"onclick="plusDivs(1, '<?php echo $mySlide;?>', 
+			                		'<?php echo $mySlide;?>')"></a>
+			                	</div>
+			                	<div class="img-detail">
+									<h5><?php echo $categoryVal->name; ?></h5>
+									<span class="paging_<?php echo $mySlide;?>">1/<?php echo $count;?></span>
+								</div>
+							</div>
+							
+							
 
 
-<?php
 
-	
-	if ( is_front_page() ) {
-		$page = get_page_by_title( 'home' );
-		$categories = get_the_category($page->ID);	
-	} else {
-		$categories = get_the_category();	
-	}
-	
-	$k=1;
-	foreach($categories as $categoryVal) {
-		$mySlide = "mySlides_".$k;
-?> 		
-<?php
-	    $paged = (get_query_var( 'paged' )) ? get_query_var( 'paged' ) : 1;
-	    $args = array(
-	        'post_type' => 'post',
-	        'post_status' => 'publish',
-	        'cat' => $categoryVal->cat_ID,
-	        //'posts_per_page' => 5,
-	        'paged' => $paged,
-	    );
-	    $arr_posts = new WP_Query( $args );			 
-?>
-<?php   
-		$posts = $arr_posts->get_posts();
-		$count = count($posts);
-	    if ( $arr_posts->have_posts() ){
-	    ?>	
-		    <div class="width-col">
-				<div class="image-wrapper">
-
-					<div class="img-box">
-					    <?php
-					    	$showImageClass = $mySlide . " show_homepage_img";
-					    	$i = 1;
-					        while ( $arr_posts->have_posts() ){ 
-					        	
-						        	$displayClass = ($i == 1) ? 'show_homepage_img' : 'hide_homepage_img';				        	
-						        	$arr_posts->the_post();
-						        	$img_attribs = wp_get_attachment_image_src( get_post_thumbnail_id(), 'thumbnail' ); 
-						        	if ( has_post_thumbnail() && $img_attribs) {
-				                    	$imagePath = the_post_thumbnail('post-thumbnail', ['class' => $mySlide . " " .$displayClass, 'style' => 'width:auto !important']);
-						        	} 					            
-						        $i++;
-						    }
-						?>
-    					<div class="img-control">
-							<a href="javascript:;" class="sl" onclick="minusDivs(-1, '<?php echo $mySlide;?>')"></a>
-	                		<a href="javascript:;" class="sr"onclick="plusDivs(1, '<?php echo $mySlide;?>', 
-	                		'<?php echo $mySlide;?>')"></a>
-	                	</div>
-	                	<div class="img-detail">
-							<h5><?php echo $categoryVal->name; ?></h5>
-							<span class="paging_<?php echo $mySlide;?>">1/<?php echo $count;?></span>
 						</div>
 					</div>
-					
-					
-
-
-
 				</div>
-			</div>
-<?php
-	}
-	$k++;
-	}
-?>	      
+	<?php
+		}
+		$k++;
+		}
+	?>	      
+	</div>
 </div>
 
 
