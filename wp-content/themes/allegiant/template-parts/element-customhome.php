@@ -44,7 +44,7 @@
 								        	$arr_posts->the_post();
 								        	$img_attribs = wp_get_attachment_image_src( get_post_thumbnail_id(), 'thumbnail' ); 
 								        	if ( has_post_thumbnail() && $img_attribs) {
-						                    	$imagePath = the_post_thumbnail('post-thumbnail', [ 'class' => $mySlide . " " .$displayClass, 'style' => 'width:auto !important']);
+						                    	$imagePath = the_post_thumbnail('post-thumbnail', [ 'class' => $mySlide . " " .$displayClass,]);
 								        	} 					            
 								        $i++;
 								    }
@@ -54,6 +54,7 @@
 			                		<a href="javascript:;" class="sr"onclick="plusDivs(1, '<?php echo $mySlide;?>', 
 			                		'<?php echo $mySlide;?>')"></a>
 			                	</div>
+			                	<div class="clr" style="clear: both"></div>
 			                	<div class="img-detail">
 									<h5><?php echo $categoryVal->name; ?></h5>
 									<span class="paging_<?php echo $mySlide;?>">1/<?php echo $count;?></span>
