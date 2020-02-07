@@ -1,6 +1,6 @@
 * { -moz-box-sizing: border-box; -o-box-sizing: border-box;
 -ms-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box; margin:0; padding:0 }
-body {padding: 0; margin: 0;font-size:16px; line-height: 1.2;  font-weight: 400; color:#444;; background-color: #f3f1ec}
+body {padding: 0; margin: 0;font-size:16px; line-height: 1.2;  font-weight: 400;font-family: 'Palatino';  color:#444;; background-color: #f3f1ec}
 @font-face {
     font-family: 'Palatino';
     src: url('../fonts/Palatino.eot');
