@@ -1,10 +1,5 @@
-<?php /*
 <div class="cont-row">
-	<div class="masonry">
-
 	<?php
-
-		
 		if ( is_front_page() ) {
 			$page = get_page_by_title( 'home' );
 			$categories = get_the_category($page->ID);	
@@ -13,14 +8,25 @@
 		}
 		
 		$k=1;
+		$number = "two";
 		foreach($categories as $categoryVal) {
-			$mySlide = "mySlides_".$k;
 
+			if($number == "two"){
+				if($k==1 || (($k-1)%5) ==0) {
+					echo '<div class="masonry masonry-'.$k.'">';
+				}
+			}
+
+			if($number == "three"){
+				if((($k+2)%5) ==0) {
+					echo '<div class="masonry masonry-'.$k.'">';
+				}
+			}
+					
+			$mySlide = "mySlides_".$k;
 			$marginLeft = "";
 			$marginRight = "";
 			$itemClass = " offset-" .$k;
-			
-
 
 	?> 		
 	<?php
@@ -78,16 +84,31 @@
 				</div>
 	<?php
 		}
-		$k++;
+			
+			if($number=="two") {
+				if( (($k-2)%5) == 0) {
+					echo '</div>';
+					$number = "three";
+				} 
+			}
+
+			if($number=="three") {
+				if( ($k%5) == 0) {
+					echo '</div>';
+					$number = "two";
+				} 
+			}
+			
+			$k++;
+
 		}
 	?>	      
-	</div>
+		
 </div>
-*/ ?>
 
 
-
-<!-- <div class="cont-row">
+<!--
+<div class="cont-row">
 	<div class="width-col">
 		<div class="image-wrapper">
 			<div class="img-box">
@@ -175,5 +196,5 @@
 		</div>
 	</div>
 
-</div> -->
-
+</div>
+-->
